@@ -10,7 +10,7 @@ import bodyParser from "body-parser"; // Middleware to parse incoming request bo
 const app = express();
 
 // Define the port on which the server will listen
-const port = 3000;
+const port = process.env.PORT || 3000; // Use dynamic port for Azure;
 
 // Get the directory name of the current module file
 const __dirname = dirname(fileURLToPath(import.meta.url));
