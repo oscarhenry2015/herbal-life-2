@@ -7,7 +7,7 @@ import 'dotenv/config';
 // Configuration
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const SSL_CONFIG = { rejectUnauthorized: false }; // Azure SSL requirement
 
 // Database Client
