@@ -75,3 +75,13 @@ app.post("/signup", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });
+
+// Add this temporary route to server.js
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await db.query("SELECT NOW() as current_time");
+    res.send(`Database connection OK! Current time: ${result.rows[0].current_time}`);
+  } catch (err) {
+    res.status(500).send(`Database error: ${err.message}`);
+  }
+});
