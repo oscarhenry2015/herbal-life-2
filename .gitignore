@@ -32,3 +32,6 @@ package-lock.json
 
 # Ignore yarn.lock (if using npm)
 yarn.lock
+
+# Ignore Azure_infrastucture
+Azure_Infrastructure/
