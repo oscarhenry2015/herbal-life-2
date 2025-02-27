@@ -2,9 +2,9 @@
 import express from "express"; // Express framework for building the server
 import path, { dirname } from "path"; // Utilities for working with file and directory paths
 import { fileURLToPath } from "url"; // Utility to convert file URL to file path
-// Import pg from "pg"; // PostgreSQL client for Node.js
+import pg from "pg"; // PostgreSQL client for Node.js
 import bodyParser from "body-parser"; // Middleware to parse incoming request bodies
-// Import { hostname } from "os"; // (Commented out) Utility to get the system's hostname
+import { hostname } from "os"; // (Commented out) Utility to get the system's hostname
 
 // Initialize the Express application
 const app = express();
@@ -16,16 +16,21 @@ const port = process.env.PORT || 3000; // Use dynamic port for Azure;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Create a new PostgreSQL client instance and configure the database connection
-// const db = new pg.Client({
-//  user: "postgres", // Database username
-//  host: "localhost", // Database host
-//  database: "postgres", // Database name
-//  password: "henry", // Database password
-//  port: 5432, // Database port
-//});
+const db = new pg.Client({
+  user: process.env.DB_USER, // Use environment variables
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: 5432,
+  ssl: { // ← THIS IS MANDATORY FOR AZURE
+    rejectUnauthorized: false // Temporary for testing
+  }
+});
 
 // Connect to the PostgreSQL database
-// db.connect();
+db.connect()
+  .then(() => console.log("Connected to PostgreSQL"))
+  .catch(err => console.error("Connection failed:", err));
 
 // Middleware to parse URL-encoded request bodies (for form submissions)
 app.use(bodyParser.urlencoded({ extended: true }));
