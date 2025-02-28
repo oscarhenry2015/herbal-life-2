@@ -4,7 +4,6 @@ import path, { dirname } from "path"; // Utilities for working with file and dir
 import { fileURLToPath } from "url"; // Utility to convert file URL to file path
 import pg from "pg"; // PostgreSQL client for Node.js
 import bodyParser from "body-parser"; // Middleware to parse incoming request bodies
-import { hostname } from "os"; // (Commented out) Utility to get the system's hostname
 
 // Initialize the Express application
 const app = express();
